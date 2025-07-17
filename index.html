@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- SEO Padrão -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Peça piadas do jeito que quiser: piadas de velho, piadas de paulista e muito mais com humor personalizado.">
+  <meta name="keywords" content="piadas, piada de velho, piada paulista, humor, comédia, engraçado, conteúdo divertido">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Peça sua piada personalizada!">
+  <meta property="og:description" content="Escolha o tipo de piada que você quer ouvir: paulista, velho, bicho grilo e muito mais!">
+  <meta property="og:image" content="URL_DA_IMAGEM_PARA_COMPARTILHAMENTO.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Peça sua piada personalizada!">
+  <meta name="twitter:description" content="Piadas do jeito que você quiser: escolha o tema e divirta-se!">
+  <meta name="twitter:image" content="URL_DA_IMAGEM_PARA_TWITTER.jpg">
+
+  <title>As melhores piadas vamos rir</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding-top: 50px;    /* espaço para ad-top */
+      padding-bottom: 50px; /* espaço para ad-bottom */
+      padding-left: 60px;   /* espaço para ad-left */
+      padding-right: 60px;  /* espaço para ad-right */
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    #btn {
+      background-color: red;
+      color: white;
+      font-size: 24px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      z-index: 1;
+    }
+
+    #btn:hover {
+      background-color: darkred;
+    }
+
+    #resultado {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+      z-index: 1;
+    }
+
+    #palavras {
+      margin-top: 30px;
+      z-index: 1;
+    }
+
+    /* Estilo das propagandas fixas */
+
+    #ad-top, #ad-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background-color: #ffcc00;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      z-index: 9999;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    /* Topo */
+    #ad-top {
+      top: 0;
+    }
+
+    /* Rodapé */
+    #ad-bottom {
+      bottom: 0;
+    }
+
+    /* Propagandas laterais */
+    #ad-left, #ad-right {
+      position: fixed;
+      top: 50px; /* para não ficar embaixo do ad-top */
+      bottom: 50px; /* para não ficar em cima do ad-bottom */
+      width: 60px;
+      background-color: #ff6600;
+      color: #fff;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 9999;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    /* Esquerda */
+    #ad-left {
+      left: 0;
+    }
+
+    /* Direita */
+    #ad-right {
+      right: 0;
+    }
+
+    /* Ajuste para dispositivos móveis (menos de 600px) */
+    @media (max-width: 600px) {
+      #ad-left, #ad-right {
+        display: none; /* esconde laterais em telas pequenas */
+      }
+
+      #ad-top, #ad-bottom {
+        height: 40px;
+        font-size: 14px;
+      }
+
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<!------------anuncios----->
+  <body>
+
+  <div id="ad-top"></div>
+  <div id="ad-left"></div>
+  <div id="ad-right"></div>
+  <div id="ad-bottom"></div>
+
+
+  
+
+  <script>
+    // Conteúdo dos anúncios, com HTML para links
+    const ads = [
+      'SEGURO E CONSÓRCIO AUTO (027)99949-7001',
+      '<a href="https://victorxx.github.io/utilidadediadia/" target="_blank" rel="noopener noreferrer">CONFERIR</a>',
+      '<a href="https://geocredibnkvitoria.com/" target="_blank" rel="noopener noreferrer">CRÉDITO PESSOAL</a>',
+      '<a href="https://victorxx.github.io/redirecionae00/" target="_blank" rel="noopener noreferrer">CONFERIR A OPORTUNIDADE</a>'
+    ];
+
+    // Áreas fixas na tela
+    const positions = ['ad-top', 'ad-left', 'ad-right', 'ad-bottom'];
+
+    // Função para embaralhar array
+    function shuffle(array) {
+      for (let i = array.length -1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i +1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Função que aplica os anúncios embaralhados
+    function randomizeAds() {
+      const shuffledAds = shuffle([...ads]); // cópia embaralhada
+
+      positions.forEach((posId, idx) => {
+        const el = document.getElementById(posId);
+        el.innerHTML = shuffledAds[idx];
+      });
+    }
+
+    // Roda ao carregar a página
+    window.onload = randomizeAds;
+  </script>
+<!------------anuncios----->
+  <button id="btn">CLIQUE PARA COMEÇAR</button>
+  <div id="resultado"></div>
+  <div id="palavras">
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Palavras que contem no sistema</th>
+        </tr>
+      </thead>
+      <!----------------palavras-->
+      <tbody>
+        <tr><td>1</td><td>PIADA</td></tr>
+        <tr><td>2</td><td>DE</td></tr>
+        <tr><td>3</td><td>VELHO</td></tr>
+        <tr><td>4</td><td>E</td></tr>
+        <tr><td>5</td><td>SÃO</td></tr>
+        <tr><td>6</td><td>PAULO</td></tr>
+        <tr><td>7</td><td>CONTÉM</td></tr>
+      </tbody>
+      <!----------------palavras-->
+    </table>
+  </div>
+
+  <!-- JavaScript externo -->
+  <script src="piada.js"></script>
+
+</body>
+</html>
